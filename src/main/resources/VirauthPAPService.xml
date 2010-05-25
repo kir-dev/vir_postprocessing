@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ServicesConfiguration
+PUBLIC "=//iPlanet//Service Management Services (SMS) 1.0 DTD//EN"
+"jar://com/sun/identity/sm/sms.dtd">
+
+<ServicesConfiguration>
+    <Service name="VirauthPAPService" version="1.0">
+        <Schema
+            serviceHierarchy="/DSAMEConfig/VirauthPAPService"
+            i18nFileName="VirauthPAPService"
+            revisionNumber="30"
+            i18nKey="virauth-pap-service-description">
+            <Organization>
+                <AttributeSchema name="sunAMVirauthPAPServiceJndiName"
+                                 type="single"
+                                 syntax="string"
+                                 i18nKey="a500">
+                    <DefaultValues>
+                        <Value>jdbc/sch</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+                <SubSchema name="serverconfig" inheritance="multiple">
+                    <AttributeSchema name="sunAMVirauthPAPServiceJndiName"
+                                     type="single"
+                                     syntax="string"
+                                     i18nKey="a500">
+                        <DefaultValues>
+                            <Value>jdbc/sch</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                </SubSchema>
+            </Organization>
+        </Schema>
+    </Service>
+</ServicesConfiguration>
