@@ -33,7 +33,6 @@ package hu.sch.postprocessing;
 
 import com.iplanet.sso.SSOToken;
 import com.sun.identity.authentication.spi.AuthenticationException;
-import com.sun.identity.shared.debug.Debug;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -54,7 +53,6 @@ public class SSSSecurityPostAuthenticationProcessing extends AbstractPostAuthent
             + "usr_sss_token_logintime = now() "
             + "WHERE usr_id = ?;";
     private static final String TOKEN_ATTR = "SSSToken";
-    private static Debug debug = Debug.getInstance("PostProcess");
 
     /**
      * Létrehoz a users táblában egy sss_tokent a belépett felhasználóhoz.

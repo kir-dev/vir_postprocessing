@@ -33,7 +33,6 @@ package hu.sch.postprocessing;
 
 import com.iplanet.sso.SSOToken;
 import com.sun.identity.authentication.spi.AuthenticationException;
-import com.sun.identity.shared.debug.Debug;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,7 +62,6 @@ public class EntitlementPostAuthenticationProcessing extends AbstractPostAuthent
     private static final String ENTITLEMENT_SEPARATOR = "|";
     private static final String SESSION_ENTITLEMENT_ATTRIBUTE = "am.protected.eduPersonEntitlement";
     private static final String URN_SEPARATOR = ":";
-    private static Debug debug = Debug.getInstance("PostProcess");
 
     @Override
     public void onLoginSuccess(Map requestMap, HttpServletRequest request, HttpServletResponse response, SSOToken ssoToken)
@@ -90,10 +88,13 @@ public class EntitlementPostAuthenticationProcessing extends AbstractPostAuthent
 
             //itt fog összeálni a nagy entitlement string, elemenként elválasztva
             StringBuilder entitlementStr = new StringBuilder(400);
+            boolean first = true;
             while (rs.next()) {
                 //az első elem elé nem kell szeparátor
-                if (!rs.isFirst()) {
+                if (!first) {
                     entitlementStr.append(ENTITLEMENT_SEPARATOR);
+                } else {
+                    first = false;
                 }
                 String groupName = rs.getString("grp_name");
                 int groupId = rs.getInt("grp_id");
@@ -106,7 +107,7 @@ public class EntitlementPostAuthenticationProcessing extends AbstractPostAuthent
             ssoToken.setProperty(SESSION_ENTITLEMENT_ATTRIBUTE, entitlementStr.toString());
             if (debug.messageEnabled()) {
                 debug.message("Entitlement attribute was set to: "
-                        + ssoToken.getProperty(ENTITLEMENT_ATTRIBUTE));
+                        + entitlementStr.toString());
             }
         } catch (Exception ex) {
             debug.warning("Exception in EntitlementPostAuthenticationProcessing: ", ex);

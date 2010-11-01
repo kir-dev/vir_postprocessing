@@ -48,7 +48,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class AbstractPostAuthenticationProcessing implements AMPostAuthProcessInterface {
 
-    private static Debug debug = Debug.getInstance("PostProcess");
+    protected static Debug debug = Debug.getInstance("PostProcess");
 
     @Override
     public abstract void onLoginSuccess(Map map, HttpServletRequest hsr, HttpServletResponse hsr1, SSOToken ssot)

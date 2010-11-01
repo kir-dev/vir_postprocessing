@@ -1,0 +1,109 @@
+--
+-- Copyright (c) 2008-2010, Peter Major
+-- All rights reserved.
+--
+-- Redistribution and use in source and binary forms, with or without
+-- modification, are permitted provided that the following conditions are met:
+-- * Redistributions of source code must retain the above copyright
+-- notice, this list of conditions and the following disclaimer.
+--  * Redistributions in binary form must reproduce the above copyright
+-- notice, this list of conditions and the following disclaimer in the
+-- documentation and/or other materials provided with the distribution.
+--  * Neither the name of the Peter Major nor the
+-- names of its contributors may be used to endorse or promote products
+-- derived from this software without specific prior written permission.
+--  * All advertising materials mentioning features or use of this software
+-- must display the following acknowledgement:
+-- This product includes software developed by the Kir-Dev Team, Hungary
+-- and its contributors.
+--
+-- THIS SOFTWARE IS PROVIDED BY Peter Major ''AS IS'' AND ANY
+-- EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+-- WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+-- DISCLAIMED. IN NO EVENT SHALL Peter Major BE LIABLE FOR ANY
+-- DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+-- (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+-- LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+-- ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+-- (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+-- SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+--
+
+--groups
+INSERT INTO groups(grp_name, grp_parent) VALUES ('KIR fejlesztők és üzemeltetők', NULL);
+INSERT INTO groups(grp_name, grp_parent) VALUES ('SVIE', NULL);
+INSERT INTO groups(grp_name, grp_parent) VALUES ('Pizzásch', NULL);
+INSERT INTO groups(grp_name, grp_parent) VALUES ('Gofffree', NULL);
+INSERT INTO groups(grp_name, grp_parent) VALUES ('La''Place', 2);
+
+--poszttipus
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(NULL,'gazdaságis');
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(NULL,'PR menedzser');
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(NULL,'körvezető');
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(NULL,'volt körvezető');
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(NULL,'vendégfogadó');
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(NULL,'feldolgozás alatt');
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(1,'választmányi elnök');
+INSERT INTO poszttipus (grp_id, pttip_name) VALUES(2,'tanfolyamfelelős');
+
+--Nincs tagság
+INSERT INTO users (usr_neptun) VALUES('ABCDEF');
+
+--Aktív tag Kir-Dev-ben
+INSERT INTO users (usr_neptun) VALUES('GHIJKL');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (1,2,'2010-01-01', NULL);
+
+--Öregtag egy körben
+INSERT INTO users (usr_neptun) VALUES('MNOPQR');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (2,3,'2010-01-01', '2010-10-12');
+
+
+--Pizzásch körvezető
+INSERT INTO users (usr_neptun) VALUES('STUVWX');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (3,4,'2010-01-01', NULL);
+INSERT INTO poszt (grp_member_id, pttip_id) VALUES (3, 3);
+
+--Kir-Dev feldolgozás alatt
+INSERT INTO users (usr_neptun) VALUES('YZABCD');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (1,5,'2010-01-01', NULL);
+INSERT INTO poszt (grp_member_id, pttip_id) VALUES (4, 6);
+
+--La'Place gazdaságis és La'Place PR menedzser
+INSERT INTO users (usr_neptun) VALUES('EFGHIJ');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (5,6,'2010-01-01', NULL);
+INSERT INTO poszt (grp_member_id, pttip_id) VALUES (5, 1);
+INSERT INTO poszt (grp_member_id, pttip_id) VALUES (5, 2);
+
+--Gofffree és Pizzásch tag
+INSERT INTO users (usr_neptun) VALUES('KLMNOP');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (4,7,'2010-01-01', NULL);
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (3,7,'2010-01-01', NULL);
+
+--La'Place tag, SVIE volt körvezető
+INSERT INTO users (usr_neptun) VALUES('QRSTUV');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (5,8,'2010-01-01', NULL);
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (2,8,'2010-01-01', NULL);
+INSERT INTO poszt (grp_member_id, pttip_id) VALUES (9, 4);
+
+--Gofffree tag, SVIE körvezető, Kir-Dev öregtag (volt körvezető közben)
+INSERT INTO users (usr_neptun) VALUES('XYZABC');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (1,9,'2010-01-01', '2010-10-31');
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (4,9,'2010-01-01', NULL);
+INSERT INTO grp_membership (grp_id, usr_id, membership_start, membership_end)
+VALUES (2,9,'2010-01-01', NULL);
+INSERT INTO poszt (grp_member_id, pttip_id) VALUES (10, 4);
+--SVIE körvezető
+INSERT INTO poszt (grp_member_id, pttip_id) VALUES (12, 3);
+
+
