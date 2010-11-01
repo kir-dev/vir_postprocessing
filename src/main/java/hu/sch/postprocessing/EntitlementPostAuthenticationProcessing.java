@@ -23,8 +23,10 @@ public class EntitlementPostAuthenticationProcessing extends AbstractPostAuthent
             + "UNION "
             + "(SELECT grp_membership.grp_id, groups.grp_name, 'tag' AS pttip_name "
             + "FROM grp_membership JOIN groups USING (grp_id) "
-            + "WHERE usr_id = ? AND grp_membership.membership_end IS null) "
-            + "ORDER BY grp_id;";
+            + "LEFT OUTER JOIN poszt ON poszt.grp_member_id = grp_membership.id "
+            + "WHERE (poszt.pttip_id <> 6 OR poszt.pttip_id IS null) AND " //feldolgozás alattiak ne kapjanak tag jogot
+            + "usr_id = ? AND grp_membership.membership_end IS null) "
+            + "ORDER BY grp_id";
     private static final String ENTITLEMENT_ATTRIBUTE = "eduPersonEntitlement";
     private static final String ENTITLEMENT_PREFIX = "urn:geant:niif.hu:sch.bme.hu:entitlement:";
     private static final String ENTITLEMENT_SEPARATOR = "|";
