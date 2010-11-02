@@ -34,7 +34,9 @@ package hu.sch.postprocessing;
 import com.iplanet.sso.SSOToken;
 import java.sql.Connection;
 import java.sql.Driver;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static junit.framework.Assert.*;
@@ -124,23 +126,11 @@ public class EntitlementsTest {
             return true;
         }
 
-        String[] res = result.split("\\|");
-        String[] exp = expected.split("\\|");
-
-        if (res.length == exp.length) {
-            for (String string : res) {
-                boolean match = false;
-                for (String string1 : exp) {
-                    if (string.equals(string1)) {
-                        match = true;
-                    }
-                }
-                if (!match) {
-                    return false;
-                }
+        if (result.length() == expected.length()) {
+            if (new HashSet<String>(Arrays.asList(result.split("\\|"))).equals(
+                    new HashSet<String>(Arrays.asList(expected.split("\\|"))))) {
+                return true;
             }
-            //ha túléltük a foreacheket, akkor csak egyformák lehetnek
-            return true;
         }
 
         return false;
