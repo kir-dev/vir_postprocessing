@@ -29,20 +29,6 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <configuration>
-                    <header>LICENSE</header>
-                    <properties>
-                        <year>2008-2010</year>
-                        <username>Peter Major</username>
-                    </properties>
-                    <excludes>
-                        <exclude>**/*.html</exclude>
-                    </excludes>
-                    <useDefaultExcludes>true</useDefaultExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -129,12 +115,6 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.mycila.maven-license-plugin</groupId>
-                    <artifactId>maven-license-plugin</artifactId>
-                    <version>1.8.0</version>
                     <version>3.1</version>
                 </plugin>
                 <plugin>
