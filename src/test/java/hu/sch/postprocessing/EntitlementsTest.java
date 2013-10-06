@@ -96,8 +96,8 @@ public class EntitlementsTest {
         }
 
         if (result.length() == expected.length()) {
-            if (new HashSet<String>(Arrays.asList(result.split("\\|"))).equals(
-                    new HashSet<String>(Arrays.asList(expected.split("\\|"))))) {
+            if (new HashSet<>(Arrays.asList(result.split("\\|"))).equals(
+                    new HashSet<>(Arrays.asList(expected.split("\\|"))))) {
                 return true;
             }
         }
