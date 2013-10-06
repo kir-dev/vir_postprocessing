@@ -16,7 +16,7 @@ PUBLIC "=//iPlanet//Service Management Services (SMS) 1.0 DTD//EN"
                                  syntax="string"
                                  i18nKey="a500">
                     <DefaultValues>
-                        <Value>jdbc/sch</Value>
+                        <Value>java:comp/env/jdbc/sch</Value>
                     </DefaultValues>
                 </AttributeSchema>
                 <SubSchema name="serverconfig" inheritance="multiple">
@@ -25,7 +25,7 @@ PUBLIC "=//iPlanet//Service Management Services (SMS) 1.0 DTD//EN"
                                      syntax="string"
                                      i18nKey="a500">
                         <DefaultValues>
-                            <Value>jdbc/sch</Value>
+                            <Value>java:comp/env/jdbc/sch</Value>
                         </DefaultValues>
                     </AttributeSchema>
                 </SubSchema>
